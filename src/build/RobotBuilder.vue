@@ -9,26 +9,26 @@
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img v-bind:src="parts.arms[0].src" title="left arm"/>
-        <button class="prev-selector">&#9650;</button>
-        <button class="next-selector">&#9660;</button>
+        <img v-bind:src="parts.arms[leftArmIndex].src" title="left arm"/>
+        <button v-on:click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
+        <button v-on:click="selectNextLeftArm()" class="next-selector">&#9660;</button>
       </div>
       <div class="center part">
-        <img v-bind:src="parts.torsos[0].src" title="left arm"/>
-        <button class="prev-selector">&#9668;</button>
-        <button class="next-selector">&#9658;</button>
+        <img v-bind:src="parts.torsos[torsoIndex].src" title="left arm"/>
+        <button v-on:click="selectPreviousTorso()" class="prev-selector">&#9668;</button>
+        <button v-on:click="selectNextTorso()" class="next-selector">&#9658;</button>
       </div>
       <div class="right part">
-        <img v-bind:src="parts.arms[0].src" title="left arm"/>
-        <button class="prev-selector">&#9650;</button>
-        <button class="next-selector">&#9660;</button>
+        <img v-bind:src="parts.arms[rightArmIndex].src" title="left arm"/>
+        <button v-on:click="selectPreviousRightArm()" class="prev-selector">&#9650;</button>
+        <button v-on:click="selectNextRightArm()" class="next-selector">&#9660;</button>
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img v-bind:src="parts.bases[0].src" title="left arm"/>
-        <button class="prev-selector">&#9668;</button>
-        <button class="next-selector">&#9658;</button>
+        <img v-bind:src="parts.bases[baseIndex].src" title="left arm"/>
+        <button v-on:click="selectPreviousBase()" class="prev-selector">&#9668;</button>
+        <button v-on:click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
     </div>
   </div>
@@ -42,11 +42,11 @@ function getNextValidIndex(index, length) {
   const incrementedIndex = index + 1;
   return incrementedIndex > length - 1 ? 0 : incrementedIndex;
 }
-
 function getPreviousValidIndex(index, length) {
   const deprecatedIndex = index - 1;
   return deprecatedIndex < 0 ? length - 1 : deprecatedIndex;
 }
+
 
 export default {
   name: 'RobotBuilder',
@@ -54,24 +54,42 @@ export default {
     return {
       parts,
       headIndex: 0,
+      rightArmIndex: 0,
+      leftArmIndex: 0,
+      baseIndex: 0,
+      torsoIndex: 0,
     };
   },
   methods: {
-    // selectNextHead() {
-    //   this.headIndex + 1 < parts.heads.length
-    //     ? this.headIndex++
-    //     : this.headIndex = 0;
-    // },
-    // selectPreviousHead() {
-    //   this.headIndex > 0
-    //     ? this.headIndex -= 1
-    //     : this.headIndex = 0;
-    // },
     selectNextHead() {
       this.headIndex = getNextValidIndex(this.headIndex, parts.heads.length);
     },
     selectPreviousHead() {
-
+      this.headIndex = getPreviousValidIndex(this.headIndex, parts.heads.length);
+    },
+    selectPreviousLeftArm() {
+      this.leftArmIndex = getPreviousValidIndex(this.leftArmIndex, parts.arms.length);
+    },
+    selectNextLeftArm() {
+      this.leftArmIndex = getNextValidIndex(this.leftArmIndex, parts.arms.length);
+    },
+    selectPreviousTorso() {
+      this.torsoIndex = getPreviousValidIndex(this.torsoIndex, parts.torsos.length);
+    },
+    selectNextTorso() {
+      this.torsoIndex = getNextValidIndex(this.torsoIndex, parts.torsos.length);
+    },
+    selectPreviousRightArm() {
+      this.rightArmIndex = getPreviousValidIndex(this.rightArmIndex, parts.arms.length);
+    },
+    selectNextRightArm() {
+      this.rightArmIndex = getNextValidIndex(this.rightArmIndex, parts.arms.length);
+    },
+    selectNextBase() {
+      this.baseIndex = getNextValidIndex(this.baseIndex, parts.bases.length);
+    },
+    selectPreviousBase() {
+      this.baseIndex = getPreviousValidIndex(this.baseIndex, parts.bases.length);
     },
 
   },
