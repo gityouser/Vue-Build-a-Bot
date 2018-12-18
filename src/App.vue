@@ -11,14 +11,14 @@
       </nav>
     </header>
     <main>
-      <!-- <HomePage /> -->
       <RobotBuilder />
+      <!-- <HomePage /> -->
     </main>
   </div>
 </template>
 
 <script>
-import HomePage from './home/HomePage.vue';
+// import HomePage from './home/HomePage.vue';
 import RobotBuilder from './build/RobotBuilder.vue';
 
 export default {
@@ -30,11 +30,15 @@ export default {
 };
 </script>
 
+
 <style>
 body {
   background: linear-gradient(to bottom, #555, #999);
   background-attachment: fixed;
 }
+</style>
+
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
